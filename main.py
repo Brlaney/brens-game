@@ -15,7 +15,7 @@ class Duck(pygame.sprite.Sprite):
             'assets/graphics/duck/duck_jump_r.png').convert_alpha()
 
         self.image = self.duck_walk[self.duck_index]
-        self.rect = self.image.get_rect(midbottom=(80, 1010))
+        self.rect = self.image.get_rect(midbottom=(80, 470))
         self.gravity = 0
 
         self.jump_sound = pygame.mixer.Sound('assets/audio/jump.mp3')
@@ -23,18 +23,18 @@ class Duck(pygame.sprite.Sprite):
 
     def duck_input(self):
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_SPACE] and self.rect.bottom >= 1010:
+        if keys[pygame.K_SPACE] and self.rect.bottom >= 470:
             self.gravity = -30
             self.jump_sound.play()
 
     def apply_gravity(self):
         self.gravity += 1
         self.rect.y += self.gravity
-        if self.rect.bottom >= 1010:
-            self.rect.bottom = 1010
+        if self.rect.bottom >= 470:
+            self.rect.bottom = 470
 
     def animation_state(self):
-        if self.rect.bottom < 1010:
+        if self.rect.bottom < 470:
             self.image = self.duck_jump
         else:
             self.duck_index += 0.1
@@ -58,14 +58,14 @@ class Obstacle(pygame.sprite.Sprite):
             fly_2 = pygame.image.load(
                 'assets/graphics/fly/Fly1.png').convert_alpha()
             self.frames = [fly_1, fly_2]
-            y_pos = 850
+            y_pos = 320
         else:
             snail_1 = pygame.image.load(
                 'assets/graphics/snail/snail1.png').convert_alpha()
             snail_2 = pygame.image.load(
                 'assets/graphics/snail/snail2.png').convert_alpha()
             self.frames = [snail_1, snail_2]
-            y_pos = 1010
+            y_pos = 460
 
         self.animation_index = 0
         self.image = self.frames[self.animation_index]
@@ -91,7 +91,7 @@ class Obstacle(pygame.sprite.Sprite):
 def display_score():
     current_time = int(pygame.time.get_ticks() / 1000) - start_time
     score_surf = test_font.render(f'Score: {current_time}', False, ('#FC9301'))
-    score_rect = score_surf.get_rect(center=(500, 50))
+    score_rect = score_surf.get_rect(center=(400, 50))
     screen.blit(score_surf, score_rect)
     return current_time
 
@@ -107,7 +107,7 @@ def collision_sprite():
 def duck_animation():
     global duck_surf, duck_index
 
-    if duck_rect.bottom < 300:
+    if duck_rect.bottom < 460:
         duck = duck_jump
 
     else:
@@ -119,7 +119,7 @@ def duck_animation():
 
 # Initialize, settings, config
 pygame.init()
-screen = pygame.display.set_mode((1000, 1200))
+screen = pygame.display.set_mode((800, 600))
 pygame.display.set_caption('My Chick Bad')
 clock = pygame.time.Clock()
 test_font = pygame.font.Font('assets/font/JosefinSans-Regular.ttf', 44)
@@ -142,13 +142,13 @@ ground_surf = pygame.image.load('assets/graphics/ground.png').convert()
 duck_stand = pygame.image.load(
     'assets/graphics/duck_intro.png').convert_alpha()
 duck_stand = pygame.transform.rotozoom(duck_stand, 0, 1)
-duck_stand_rect = duck_stand.get_rect(center=(500, 850))
+duck_stand_rect = duck_stand.get_rect(center=(400, 400))
 
 game_name = test_font.render('My Chick Bad', False, ('#FFB903'))
-game_name_rect = game_name.get_rect(center=(500, 380))
+game_name_rect = game_name.get_rect(center=(400, 175))
 
 game_message = test_font.render('Press space to run', False, ('#FC9301'))
-game_message_rect = game_message.get_rect(center=(500, 500))
+game_message_rect = game_message.get_rect(center=(400, 250))
 
 # Timer
 obstacle_timer = pygame.USEREVENT + 1
@@ -179,7 +179,7 @@ while True:
 
     if game_active:
         screen.blit(sky_surf, (0, 0))
-        screen.blit(ground_surf, (0, 1000))
+        screen.blit(ground_surf, (0, 460))
         score = display_score()
 
         duck.draw(screen)
@@ -196,7 +196,7 @@ while True:
 
         score_message = test_font.render(
             f'Your score: {score}', False, ('#FC9301'))
-        score_message_rect = score_message.get_rect(center=(500, 500))
+        score_message_rect = score_message.get_rect(center=(400, 250))
         screen.blit(game_name, game_name_rect)
 
         if score == 0:
