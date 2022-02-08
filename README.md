@@ -1,3 +1,3 @@
 # Pygame
 
-Tutorial followed: (link)[https://www.youtube.com/watch?v=AY9MnQ4x3zk]
+Tutorial followed: (https://www.youtube.com/watch?v=AY9MnQ4x3zk)[link]
