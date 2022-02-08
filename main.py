@@ -147,7 +147,7 @@ duck_stand_rect = duck_stand.get_rect(center=(400, 400))
 game_name = test_font.render('My Chick Bad', False, ('#FFB903'))
 game_name_rect = game_name.get_rect(center=(400, 175))
 
-game_message = test_font.render('Press space to run', False, ('#FC9301'))
+game_message = test_font.render('Press space to start', False, ('#FC9301'))
 game_message_rect = game_message.get_rect(center=(400, 250))
 
 # Timer
